@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <title>Steps to work with Yajra Library by AliSamtia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="ml-20 mt-10">
+    <h1 class="text-black m-0 p-0 text-3xl font-bold">
+        Steps to work with Yajra Library by AliSamtia
+    </h1>
+    <table class="table-auto">
+        <tr>
+            <h2 class="text-3xl pt-10">1. Install Dependencies</h2>
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td>1. composer require laravel/ui --dev</td>
+                    <td>2. php artisan ui bootstrap --auth</td>
+                    <td>3. composer require yajra/laravel-datatables</td>
+                    <td>4. npm i laravel-datatables-vite --save-dev</td>
+                    <td>5. php artisan vendor:publish --tag=datatables</td>
+                </tr>
+            </table>
+        </tr>
+        <tr>
+            <h2 class="text-3xl pt-10">2. Cofigure Files</h2>
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td><b>resources/js/app.js</b></td>
+                    <td>import './bootstrap';</td>
+                    <td>import 'laravel-datatables-vite';</td>
+                </tr>
+            </table>
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td><b>resources/sass/app.scss</b></td>
+                    <td>// Fonts <br>@import url('https://fonts.bunny.net/css?family=Nunito');<br> // Variables<br> @import 'variables';<br> // Bootstrap<br> @import 'bootstrap/scss/bootstrap';<br> // DataTables<br> @import 'bootstrap-icons/font/bootstrap-icons.css';<br>                        @import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";<br> @import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";<br> @import 'datatables.net-select-bs5/css/select.bootstrap5.css';</td>
+                </tr>
+            </table>
+        </tr>
+        <tr>
+            <h2 class="text-3xl pt-10">2. Create Some Files</h2>
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td>php artisan datatables:make Users</td>
+                    <td>php artisan make:controller UsersController</td>
+                </tr>
+            </table>
+
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td><b>Add this in Users Controller</b></td>
+                    <td> public function index(UsersDataTable $dataTable)<br> {
+                        <br> return $dataTable->render('users.index');<br> }
+                    </td>
+                    <td><b>Add this in Providers Boot</b></td>
+                    <td>
+                        Builder::useVite();
+                    </td>
+                </tr>
+            </table>
+        </tr>
+        <tr>
+            <h2 class="text-3xl pt-10">3. Front-End</h2>
+            <table class="table-auto">
+                <tr class="flex flex-col">
+                    <td><b>Include some of these Files</b></td>
+                    <td><code>
+                      &lt;link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /&gt;
+                      <br>
+                      &lt;meta name="csrf-token" content="{{ csrf_token() }}"&gt;
+                      <br>
+                      &lt;script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"&gt;&lt;/script&gt;
+                      <br>
+                      &lt;script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"&gt;&lt;/script&gt;
+                    </code>
+                    </td>
+                    <td><b>Javascript code to run this</b></td>
+                    <td><code>
+                      $(document).ready(function() {<br>
+                          var table = $('.user_datatable').DataTable({<br>
+                              processing: true,<br>
+                              serverSide: true,<br>
+                              ajax: "{{ route('users.index') }}",<br>
+                              columns: [<br>
+                                  {data: 'id', name: 'id'},<br>
+                                  {data: 'name', name: 'name'},<br>
+                                  {data: 'email', name: 'email'},<br>
+                                  {data: 'action', name: 'action', orderable: false, searchable: false},<br>
+                              ]<br>
+                          });<br>
+                        });<br></code></td>
+                    <td><b>Html Code</b></td>
+                    <td><code>
+                      &lt;table class="table table-striped table-bordered user_datatable"&gt;<br>
+                        &lt;thead&gt;<br>
+                          &lt;tr&gt;<br>
+                            &lt;th&gt;ID&lt;/th&gt;<br>
+                            &lt;th&gt;Name&lt;/th&gt;<br>
+                            &lt;th&gt;Email&lt;/th&gt;<br>
+                            &lt;th width="180px"&gt;Action&lt;/th&gt;<br>
+                          &lt;/tr&gt;<br>
+                        &lt;/thead&gt;<br>
+                        &lt;tbody&gt;&lt;/tbody&gt;<br>
+                      &lt;/table&gt;<br>
+                    </code>
+                    </td>
+                </tr>
+            </table>
+
+
+        </tr>
+        <tr>
+            <h2 class="text-3xl pt-10">4. Note:</h2>
+            <td><b>You are required to run this command every time you use it:</b></td>
+            <td>npm run dev</td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
