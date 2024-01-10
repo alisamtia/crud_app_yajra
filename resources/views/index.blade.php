@@ -173,7 +173,8 @@ $(document).ready(function() {
     $(document).on("click",".edit",function(){
         $("#edit-modal").show(1000);
         var tr=$(this).closest('tr');
-        $("#edit-form").prepend("<input type='hidden' id='id_edit' name='id' value='"+tr.attr('id')+"'>");
+        $("#edit-form").attr("action","/update/"+tr.attr('id'));
+        $("#edit-form").prepend("<input type='hidden' name='id' value='"+tr.attr('id')+"'></input>");
         $("#edit_email").val(tr.children().eq(2).html());
         $("#edit_name").val(tr.children().eq(1).html());
         $("#edit_password").val("");

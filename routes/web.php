@@ -15,6 +15,6 @@ use App\Http\Controllers\UsersController;
 Auth::routes();
 
 Route::get("/",[UsersController::class,'index'])->name("index");
-Route::post("/update",[UsersController::class,'update']);
-Route::post("/create",[UsersController::class,'create']);
-Route::delete("/delete",[UsersController::class,'delete'])->name('delete');
+Route::post("/update/{user}",[UsersController::class,'update'])->name("update");
+Route::post("/create",[UsersController::class,'create'])->name("create");
+Route::delete("/delete/{user}",[UsersController::class,'delete'])->name('delete');

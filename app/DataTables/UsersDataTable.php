@@ -28,7 +28,7 @@ class UsersDataTable extends DataTable
                             <div>
                                 <a class='cursor-pointer px-7 py-1 rounded-xl edit bg-green-500 text-white'>Edit</a>
                             </div>
-                            <form method='post' class='m-0' action='".route('delete')."'>
+                            <form method='post' class='m-0' action='".route('delete',$data->id)."'>
                             <input type='hidden' name='_token' value='".csrf_token()."' autocomplete='off'>
                                 <input type='hidden' name='_method' value='delete'>
                                 <input type='hidden' name='id' value='".$data->id."'>
